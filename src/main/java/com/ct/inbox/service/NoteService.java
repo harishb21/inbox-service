@@ -13,7 +13,7 @@ public interface NoteService {
 	 * 
 	 * @return
 	 */
-	List<Notes> getAllNotes(long sender, long reciever);
+	List<Notes> getAllNotes(long sender_user_id, long reciever_user_id);
 
 	/**
 	 * Copy local Data to new model and Notes that
@@ -29,7 +29,13 @@ public interface NoteService {
 	 * @param id
 	 * @return
 	 */
-	Notes getNotes(long id);
+	List<Notes> getNotes(long id);
+
+	List<Notes> getUserNotes(long sender);
+
+	List<Notes> allNotes();
+
+	List<Notes> getUserRecievedNotes(int sender_user_id);
 
 
 

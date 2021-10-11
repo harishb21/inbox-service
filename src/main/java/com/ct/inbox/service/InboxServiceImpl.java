@@ -9,12 +9,17 @@ import org.springframework.web.client.RestTemplate;
 
 import com.ct.inbox.model.Staff;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class InboxServiceImpl implements InboxService {
 	@Autowired
 	private RestTemplate restTemplate;
 	@Override
 	public List<Staff> getAllPhysicians() {
-		return Arrays.asList(restTemplate.getForObject("http://USER-SERVICE/employees/physicians", Staff[].class));
+		
+		List<Staff> physicians = Arrays.asList(restTemplate.getForObject("http://USER-SERVICE/employees/physicians", Staff[].class));
+		return physicians;
 	}
 }

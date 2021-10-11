@@ -1,6 +1,7 @@
 package com.ct.inbox.model;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,11 +22,17 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 
-@NoArgsConstructor
+
 @Data
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity
+@NoArgsConstructor
+@Table(name = "users")
 public class User {
-
-
+	
+	@Id
+	@SequenceGenerator(name = "myKeySeq", sequenceName = "user_sequences ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "myKeySeq")
 	private Long userId;
 	private String title;
 	private String firstName;

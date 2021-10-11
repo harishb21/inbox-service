@@ -3,21 +3,24 @@ package com.ct.inbox.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Embeddable
+@Entity
+@Table(name = "staff_details")
 public class Staff extends User {
 
 
 //	private long staffId;
 
-	private Integer roleId;
+	private Integer role;
 
 	private Integer empId;
 
@@ -37,4 +40,6 @@ public class Staff extends User {
 //
 //	@UpdateTimestamp
 //	private java.util.Date updatedOn;
+	
+	
 }
