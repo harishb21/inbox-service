@@ -17,10 +17,10 @@ public interface NotesRepository extends JpaRepository<Notes, Long> {
 	@Query(value = "select * FROM notes n INNER JOIN staff_details s on s.user_id = n.sender_user_id INNER Join roles r on s.role_id = r.role_Id where n.sender_user_id = :sender_user_id", nativeQuery = true)
 	List<Notes> findAllBySender(int sender_user_id);
 
-//	@Query(value = "select s.user_id, n.notesid, s.first_name, s.last_name, r.role_name, n.date, n.message, n.urgency FROM notes n INNER JOIN staff_details s on s.user_id = n.sender_user_id INNER Join roles r on s.role_id = r.role_Id where n.sender_user_id = :sender_user_id AND n.receiver_user_id = :receiver_user_id", nativeQuery = true)
-//	List<Notes> findAll(@Param("sender_user_id")long sender_user_id,@Param("receiver_user_id") long receiver);
+	@Query(value = "select * FROM notes n INNER JOIN staff_details s on s.user_id = n.receiver_user_id INNER Join roles r on s.role_id = r.role_Id where n.receiver_user_id = :receiver_user_id", nativeQuery = true)
+	List<Notes> findAllByReceiver(@Param("receiver_user_id") int receiver_user_id);
 
-	//List<Notes> findAllBySender_User_Id(long sender_user_id);
+
 	
 
 }

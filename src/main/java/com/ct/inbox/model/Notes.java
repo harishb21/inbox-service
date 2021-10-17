@@ -18,11 +18,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "notes")
 @NoArgsConstructor
 @Data
+@ToString
 public class Notes {
 
 	@Id
@@ -37,17 +39,11 @@ public class Notes {
 	private Staff receiver;
 
 	private String message;
+	private String[] reply;
+	
 	private boolean urgency;
-
-	@Override
-	public String toString() {
-		return "Notes [notesid=" + notesid + ", date=" + date + ", sender=" + sender
-				+ ", receiver=" + receiver + ", message=" + message + ", urgency=" + urgency + "]";
-	}
-
+	private boolean isdeleted;
+	private boolean isRead;
 	
 	
-
-
-
 }

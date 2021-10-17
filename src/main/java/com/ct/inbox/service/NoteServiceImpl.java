@@ -1,6 +1,7 @@
 package com.ct.inbox.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -29,13 +30,7 @@ public class NoteServiceImpl implements NoteService {
 	private StaffRepository staffRepository;
 	@Autowired
 	private RestTemplate restTemplate;
-	@Override
-	public List<Notes> getAllNotes(long sender, long receiver) {
-		
-		List<Notes> notes = notesRepository.findAll();
-		log.info(notes.toString());
-		return notes;
-	}
+
 
 	@Override
 	public Notes save(Notes notes) {
@@ -44,37 +39,43 @@ public class NoteServiceImpl implements NoteService {
 		Staff receiver =restTemplate.getForObject("http://USER-SERVICE/employees/"+notes.getReceiver().getUserId(), Staff.class);
 		notes.setSender(sender);
 		notes.setReceiver(receiver);
+		notes.setIsdeleted(false);
+		notes.setReply(new String[] {});
 		notes.setDate(new Date(System.currentTimeMillis()));
 		return notesRepository.save(notes);
 		
 	}
 
 	@Override
-	public List<Notes> getNotes(long id) {
-		//Notes note = notesRepository.findById(id);
-	
-		return null;
+	public List<Notes> getUserSentNotes(int sender_userid) {
+		
+		return notesRepository.findAllBySender(sender_userid);
+		
+			//return new ArrayList<Notes>();
 	}
-
 	@Override
-	public List<Notes> getUserNotes(long sender) {
-		// TODO Auto-generated method stub
-		//List<Notes> notes = notesRepository.findAllBySender_User_Id(sender);
-		//log.info(notes.toString());
-		return null;
+	public List<Notes> getUserRecievedNotes(int receiver_user_id) {
+//		try {
+			log.info(notesRepository.findAllByReceiver(receiver_user_id).toString());
+		return notesRepository.findAllByReceiver(receiver_user_id);
+//		}
+//		catch(Exception e) {
+//			return new ArrayList<Notes>();
+//		}
 	}
-
 	@Override
-	public List<Notes> allNotes() {
-		notesRepository.findAll().stream().forEach(System.out::println);
-		return notesRepository.findAll();
+	public void addReply(Notes note) {
+		Notes obj = notesRepository.getById(note.getNotesid());
+		obj.setReply(note.getReply());
+		notesRepository.save(obj);
+		
 	}
-
 	@Override
-	public List<Notes> getUserRecievedNotes(int sender_user_id) {
-		return notesRepository.findAllBySender(sender_user_id);
+	public void deleteNotes(long notesId) {
+		Notes obj = notesRepository.getById(notesId);
+		obj.setIsdeleted(true);
+		notesRepository.save(obj);
+		
 	}
-
-	
 
 }

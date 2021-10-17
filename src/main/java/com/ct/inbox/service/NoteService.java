@@ -9,13 +9,6 @@ public interface NoteService {
 
 
 	/**
-	 * Returns All the notes
-	 * 
-	 * @return
-	 */
-	List<Notes> getAllNotes(long sender_user_id, long reciever_user_id);
-
-	/**
 	 * Copy local Data to new model and Notes that
 	 * 
 	 * @param patient
@@ -24,19 +17,32 @@ public interface NoteService {
 	Notes save(Notes notes);
 
 	/**
-	 * Returns Patient From By Searching with notes ID
+	 * Returns Notes send by the User sender ID
 	 * 
 	 * @param id
-	 * @return
+	 * @return list of notes
 	 */
-	List<Notes> getNotes(long id);
 
-	List<Notes> getUserNotes(long sender);
+	List<Notes> getUserSentNotes(int sender_userId);
 
-	List<Notes> allNotes();
+	/**
+	 * Returns Notes send by the User sender ID
+	 * 
+	 * @param id
+	 * @return list of notes
+	 */
 
-	List<Notes> getUserRecievedNotes(int sender_user_id);
+	List<Notes> getUserRecievedNotes(int receiver_userId);
+	
+	/*
+	 * save the reply
+	 * for perticular notes
+	 * it will return nothing
+	 * */
+	void addReply(Notes note);
 
-
-
+	/*
+	 * disable the notes from user
+	 * */
+	void deleteNotes(long notesId);
 }
