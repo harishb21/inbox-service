@@ -20,7 +20,7 @@ public class Staff extends User {
 
 //	private long staffId;
 
-	private Integer role;
+	private Integer roleId;
 
 	private Integer empId;
 

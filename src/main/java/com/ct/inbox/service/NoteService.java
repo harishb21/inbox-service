@@ -1,7 +1,7 @@
 package com.ct.inbox.service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 import com.ct.inbox.model.Notes;
 
@@ -45,4 +45,8 @@ public interface NoteService {
 	 * disable the notes from user
 	 * */
 	void deleteNotes(long notesId);
+	
+	Map<String,Object> getNonReadCount(int receiver_user_id);
+	Map<String, Object> messageRead(long notesId);
+	
 }

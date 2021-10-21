@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,4 +80,25 @@ public class NoteServiceImpl implements NoteService {
 		
 	}
 
+	@Override
+	public Map<String, Object> getNonReadCount(int receiver_user_id) {
+		long count = notesRepository.countByIsRead(receiver_user_id);
+		Map<String, Object> response = new HashMap<>();
+		response.put("nonreadcount", count);
+		return response;
+	}
+
+	@Override
+	public Map<String, Object> messageRead(long notesId) {
+		Notes note= notesRepository.findByNotesid(notesId);
+		note.setRead(true);
+		notesRepository.save(note);
+		
+		Map<String, Object> response = new HashMap<>();
+		response.put("Message read", new String());
+		
+		return response;
+	}
+
 }
+;
