@@ -15,7 +15,7 @@ import com.ct.inbox.model.Staff;
 import com.ct.inbox.service.InboxService;
 
 
-@CrossOrigin(value = "*")
+
 @RestController
 @RequestMapping(value = "/inbox/")
 public class InboxController {

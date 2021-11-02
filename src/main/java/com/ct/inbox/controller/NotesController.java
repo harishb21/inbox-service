@@ -22,7 +22,7 @@ import com.ct.inbox.service.NoteService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@CrossOrigin(value = "*")
+
 @RestController
 @Slf4j
 @RequestMapping(value = "/notes/")
